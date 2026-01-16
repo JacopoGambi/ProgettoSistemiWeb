@@ -1,0 +1,408 @@
+/* ==========================================================================
+   1. STILI GENERALI
+   ========================================================================== */
+   :root {
+    --mobile-breakpoint: 768px;
+    --primary-color: #333;
+    --header-bg: #0f739d;
+    --header-border: #4a6fa5;
+    --transition-speed: 0.3s;
+    --color-text-light: #ffffff;
+  }
+  
+  body {
+    font-family: Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #ffffff;
+    color: #1b1d1d;
+    margin: 0;
+    text-align: justify; /*per giustificare i testi*/
+  }
+  
+  h1 {
+    color: #141515;
+    margin-bottom: 0.8em;
+  }
+  
+  h2, h3, h4, h5, h6 {
+    color: #0b689b;
+    margin-bottom: 0.8em;
+  }
+  
+  a {
+    color: #1357bd;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #166088;
+    text-decoration: underline;
+  }
+  
+  /* ==========================================================================
+     2. HEADER, FOOTER E STRUTTURE GENERALI
+     ========================================================================== */
+  #app-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main.content-area {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  header.main-header {
+    background-color: var(--header-bg);
+    color: #dbe9ee;
+    text-align: center;
+    border-bottom: 4px solid var(--header-border);
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  
+  footer {
+    background-color: #166088;
+    color: #dbe9ee;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  /* ==========================================================================
+     3. NAVIGAZIONE E MENU HAMBURGER
+     ========================================================================== */
+  #main-navbar .navbar-nav .nav-link {
+    color: #ffffff;
+    font-weight: bold;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  #main-navbar .navbar-nav .nav-link:hover,
+  #main-navbar .navbar-nav .nav-link.active {
+    color: #ffffff;
+    background-color: rgba(74, 111, 165, 0.5);
+    border-radius: 4px;
+  }
+  
+  #main-navbar .navbar-brand {
+    color: #dbe9ee;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* per la navigazione desktop */
+  @media (min-width: 769px) {
+    .main-header {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 15px 30px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    nav li {
+      margin-left: 20px;
+    }
+    .main-header nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .main-header nav ul li a:hover {
+      color: #f0f0f0;
+      opacity: 0.8;
+    }
+    .hamburger-btn {
+      display: none;
+    }
+  }
+  
+  /* Menù Hamburger mobile*/
+  @media (max-width: 768px) {
+    .main-header {
+      justify-content: flex-start;
+      padding: 0;
+    }
+    nav {
+      display: block;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80%;
+      max-width: 300px;
+      height: 100%;
+      background-color: white;
+      padding-top: 80px;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+      transform: translateX(300px);
+      transition: transform var(--transition-speed) ease-in-out;
+      z-index: 1000;
+    }
+    nav.menu-open {
+      transform: translateX(0);
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    nav li {
+      margin-left: 0;
+      border-bottom: 1px solid #eee;
+    }
+    nav a {
+      display: block;
+      padding: 15px 20px;
+    }
+    nav.menu-open ul li a {
+      color: #0b689b;
+      font-size: 1.2rem;
+    }
+    nav.menu-open ul li a.router-link-active {
+      color: #000000;
+      font-weight: bold;
+    }
+    .hamburger-btn {
+      display: block;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .line {
+      display: block;
+      width: 100%;
+      height: 4px;
+      margin: 6px 0;
+      background-color: var(--primary-color);
+      transition: transform var(--transition-speed), opacity var(--transition-speed);
+    }
+    .line.open:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+    .line.open:nth-child(2) { opacity: 0; }
+    .line.open:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+  }
+  
+  /* ==========================================================================
+     4. BOTTONI, FORM, TABELLE
+     ========================================================================== */
+
+  .btn-custom, .btn-invia {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto;
+  }
+  .btn-invia { width: 100%; background-color: #3498db; }
+  .btn-custom:hover { background-color: #0b5ed7; }
+  
+  .btn-dettagli, .btn-edit {
+    display: inline-block;
+    text-align: center;
+    background-color: #0f739d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-edit { background-color: #007bff; padding: 10px 20px; }
+  .btn-dettagli:hover { background-color: #0a5a7d; }
+  
+  .btn-logout, .btn-logout-scelta {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .btn-logout-scelta { padding: 12px 25px; border-radius: 8px; font-weight: bold; background-color: #dc3545; }
+  
+  .btn-prenota {
+    display: inline-block;
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .btn-login-prompt, .btn-login-required {
+    display: inline-block;
+    background-color: #34495e;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: bold;
+    border: 1px dashed #fff;
+  }
+  
+  /* Form e Tabelle Generali */
+  .form-label { color: #166088; font-weight: bold; margin-bottom: 0.3rem; }
+  .form-control { border: 1px solid #c0d6df; font-size: 1em; }
+  .form-control:focus { border-color: #4a6fa5; box-shadow: 0 0 0 0.25rem rgba(74, 111, 165, 0.25); }
+  
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+  th, td { border: 1px solid #c0d6df; padding: 12px; text-align: left; }
+  th { background-color: #f4f4f4; color: #166088; font-weight: bold; }
+  tr:nth-child(even) { background-color: #f0f7fa; }
+  tr:hover { background-color: #e1edf2; }
+  
+  /* ==========================================================================
+     5. COMPONENTI SPECIFICI 
+     ========================================================================== */
+  
+  /* Header */
+  .header-brand { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+  .header-brand h1 { font-size: 3rem; font-weight: bold; margin: 0; color: var(--color-text-light); text-align: center; }
+  .nav-logo { height: 250px; width: auto; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); object-fit: cover; }
+  @media (max-width: 768px) { .nav-logo { height: 150px; } }
+  
+  /* User Pill */
+  .user-pill {
+    position: absolute;
+    top: 15px;
+    right: 80px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 12px;
+    border-radius: 50px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    z-index: 10;
+  }
+  .user-avatar { width: 28px; height: 28px; background-color: #007bff; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8em; margin-right: 8px; }
+  .user-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .pill-name { font-size: 0.85em; font-weight: 600; color: #333; }
+  .pill-role { font-size: 0.65em; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+  
+  /* Griglia Camere */
+  .camere-container, .lista-camere, .hotel-page {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .camera-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .camera-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+  .camera-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 3px solid #0f739d; }
+  .camera-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; text-align: left; }
+  .price { font-size: 1.1rem; margin-top: auto; padding-bottom: 15px; color: #2c3e50; }
+  .price strong { color: #0f739d; font-size: 1.4rem; }
+  
+  /* Dashboard & Prenotazioni */
+  .welcome-banner {
+    background-color: #f0f4f8;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #3498db;
+  }
+  .prenotazioni-container { padding: 20px; max-width: 1100px; margin: 0 auto; }
+  .tabella-prenotazioni table { width: 100%; margin-top: 20px; }
+  .btn-delete { background-color: #ff4d4d; color: white; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; }
+  .btn-delete:hover { background-color: #cc0000; }
+  
+  /* ==========================================================================
+     6. SEZIONI SPECIFICHE (LOGIN, RECENSIONI, CALENDARIO)
+     ========================================================================== */
+  #login-section, #contatti-section, .login-container {
+    background-color: #dbe9ee;
+    padding: 30px;
+    margin: 40px auto;
+    border-radius: 8px;
+    border: 1px solid #c0d6df;
+    max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  .login-form ul { list-style-type: none; padding: 0; }
+  .login-form li { margin-bottom: 15px; }
+  
+  /* Recensioni */
+  .reviews-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px; }
+  .review-card { background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 12px; width: 320px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .reviewer-stars { color: #f1c40f; margin: 10px 0; }
+  
+  /* Calendario */
+  .calendar-wrapper { max-width: 400px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 30px; }
+  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
+  .day-square { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; border: 1px solid #f0f0f0; }
+  .day-square.selected { background-color: #007bff !important; color: white; }
+  .day-square.in-range { background-color: #d1e7ff; }
+  
+  /* Accesso Scelta */
+  .scelta-container { max-width: 900px; margin: 60px auto; text-align: center; }
+  .cards-wrapper { display: flex; gap: 30px; justify-content: center; margin-top: 40px; }
+  .access-card { flex: 1; max-width: 350px; padding: 40px 20px; border: 1px solid #e0e0e0; border-radius: 15px; background: white; transition: 0.3s; }
+  .access-card:hover { transform: translateY(-10px); }
+
+
+  /*Carosello*/
+  .carousel-section {
+    max-width: 850px; 
+    margin: 40px auto; 
+  }
+  
+  .carousel-img {
+    height: 350px;
+    object-fit: cover; 
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-img {
+      height: 250px; 
+    }
+  }
