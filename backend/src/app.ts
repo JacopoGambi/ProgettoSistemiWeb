@@ -1,11 +1,11 @@
 import express, { Express } from "express";
-import mysql from "mysql2"; 
 
 import camereRouter from "./routes/camere-router";
 import prenotazioniRouter from "./routes/prenotazioni-router";
 import loginRouter from "./routes/login-router";
 import recensioniRouter from "./routes/recensioni-router";
 import spiaggiaRouter from "./routes/spiaggia-router";
+import { db } from "./utils/db";
 
 const app: Express = express();
 const port: number = 3000;
@@ -24,15 +24,7 @@ app.use("/api", spiaggiaRouter);
 // gestione file statici
 app.use(express.static("public")); 
 
-// connessione ad database
-export const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "Hotel",
-});
-
-// test della connessione
+// test della connessione (connessione unica in src/utils/db.ts)
 db.connect((err) => {
   if (err) {
     console.error("Errore di connessione al database:", err.message);
