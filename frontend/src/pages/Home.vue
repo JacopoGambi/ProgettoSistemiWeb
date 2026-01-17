@@ -86,13 +86,13 @@
 
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="/immagini/spiaggia1.png" class="d-block w-100 carousel-img" alt="Spiaggia">
+        <img src="/immagini/singola.jpg" class="d-block w-100 carousel-img" alt="Camera">
       </div>
       <div class="carousel-item">
         <img src="/immagini/ristorante.png" class="d-block w-100 carousel-img" alt="Ristorante">
       </div>
       <div class="carousel-item">
-        <img src="/immagini/camera3.png" class="d-block w-100 carousel-img" alt="Camera">
+        <img src="/immagini/singola.jpg" class="d-block w-100 carousel-img" alt="Camera">
       </div>
     </div>
 
