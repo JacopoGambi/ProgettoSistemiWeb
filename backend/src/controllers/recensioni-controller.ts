@@ -17,7 +17,7 @@ export const getRecensioni = async(req: Request, res: Response) => {
 //createRecensione -> add nuova recensione OK FUNZIONA
 export const createRecensione = async(req: Request, res: Response) => {
   const { username, testo, voto } = req.body;
-  const sql = 'iNSERT INTO Recensioni (username, testo, voto) VALUES (?, ?, ?,';
+  const sql = 'INSERT INTO Recensioni (username, testo, voto) VALUES (?, ?, ?)';
 
   connection.execute(sql, [username, testo ,voto], (err, results) => {
     if (err){

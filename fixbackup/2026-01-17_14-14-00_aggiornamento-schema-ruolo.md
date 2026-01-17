@@ -56,7 +56,7 @@ SELECT id, username, ruolo FROM utenti WHERE username=?
 
 **Login:**
 ```typescript
-SELECT id, username, password, ruolo FROM utenti WHERE username=?
+SELECT username, password, ruolo FROM utenti WHERE username=?
 ```
 
 ---

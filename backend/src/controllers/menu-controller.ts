@@ -18,9 +18,9 @@ export const getMenu = async (req: Request, res: Response) => {
 export const updateMenu = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { piatto, descrizionepiatto, prezzopiatto } = req.body;
-    const sql = `UPDATE menu SET piatto = ?, descrizionepiatto = ?, prezzopiatto = ? WHERE idpiatto = ?`;
-  
-    connection.execute(sql, [piatto, descrizionepiatto, prezzopiatto], (err, results) => {
+    const sql = "UPDATE menu SET descrizionepiatto = ?, prezzopiatto = ? WHERE idpiatto = ?";
+
+    connection.execute(sql, [descrizionepiatto, prezzopiatto, id], (err, results) => {
       if (err) {
         console.error("Errore DB:", err);
         return res.status(500).send("Errore durante l'aggiornamento: " + err.message);

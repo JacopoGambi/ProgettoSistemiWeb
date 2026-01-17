@@ -7,7 +7,7 @@ import { ResultSetHeader } from 'mysql2';
 //add una nuova prenotazione ristorante OK
 export const createPrenotazioneRistorante = async(req: Request, res: Response) => {
     const { idtavolo, username, data, ora , ospiti} = req.body;
-    const sql = "INSERT INTO prenotazioni_ristorante (username, data, ora , ospiti, idtavolo) VALUES (?, ?, ?, ?)";
+    const sql = 'INSERT INTO prenotazioni_ristorante (username, data, ora, ospiti) VALUES (?, ?, ?, ?)';
       
     connection.execute(sql, [username, data, ora , ospiti], (err, results) => { 
         if (err) {

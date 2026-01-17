@@ -6,6 +6,7 @@ export interface dettaglicamera {
     prezzocamera: number
 }
 
+//camera
 export interface prenotazioni {
     idprenotazione: number;
     idcamera: number;
@@ -15,6 +16,7 @@ export interface prenotazioni {
     ospiti: number;
 }
 
+  //ristorante
 export interface prenotazioni_ristorante {
     idtavolo: number;
     username: string;
@@ -38,9 +40,16 @@ export interface recensioni {
     voto: number;
 }
 
-export interface Menu {
+
+export interface MenuItem {
     idpiatto: number;
     piatto: string;
     descrizionepiatto: string;
     prezzopiatto: number;
-}
+    editing?: boolean;
+    original?: {
+      piatto: string;
+      descrizionepiatto: string;
+      prezzopiatto: number;
+    };
+  }

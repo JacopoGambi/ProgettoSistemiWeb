@@ -34,7 +34,7 @@ export const register = async (req: Request, res: Response) => {
 
   // Estrae i dati per il nuovo utente
   const [rows] = await db.execute(
-    "SELECT id, username, ruolo FROM utenti WHERE username=?",
+    "SELECT username, ruolo FROM utenti WHERE username=?",
     [username]
   ) as any //cast
   const newUser = (rows as User[])[0]
@@ -56,7 +56,7 @@ export const login = async (req: Request, res: Response) => {
 
   // Esegue la query al database per ottenere i dati dell'utente in base allo username
   const [userLog] = await db.execute(
-    "SELECT id, username, password, ruolo FROM utenti WHERE username=?",
+    "SELECT username, password, ruolo FROM utenti WHERE username=?",
     [username]
   ) as any
 

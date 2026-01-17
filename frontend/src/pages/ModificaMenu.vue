@@ -1,7 +1,7 @@
 <script lang="ts">
   import { defineComponent } from "vue";
   import axios from "axios";
-  import { Menu } from "../types";
+  import { MenuItem } from "../types";
   
   export default defineComponent({
     name: "ModificaPiatto", 
@@ -13,7 +13,7 @@
     },
     data() {
       return {
-        piatto: null as Menu | null,
+        piatto: null as MenuItem | null,
         caricamento: true
       };
     },
@@ -22,7 +22,7 @@
         this.caricamento = true;
         axios.get("/api/aggiornaMenu")
           .then(res => {
-            const trovata = res.data.find((c: Menu) => c.idpiatto == this.idpiatto);
+            const trovata = res.data.find((c: MenuItem) => c.idpiatto == this.idpiatto);
             if (trovata) {
               this.piatto = trovata;
             }

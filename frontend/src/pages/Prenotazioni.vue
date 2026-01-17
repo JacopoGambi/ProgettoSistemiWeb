@@ -2,18 +2,11 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { prenotazioni } from '../types';
+import { prenotazioni_ristorante } from '../types';
 
-/** Tipizzazione ristorante (come pagina Ristorante) */
-interface PrenotazioneRistorante {
-  idtavolo: number;
-  username: string;
-  data: string;
-  ora: string;
-  ospiti: number;
-}
 
 const listaPrenotazioni = ref<prenotazioni[]>([]);
-const prenotazioniRistorante = ref<PrenotazioneRistorante[]>([]);
+const prenotazioniRistorante = ref<prenotazioni_ristorante[]>([]);
 
 const username = localStorage.getItem('username');
 const tipo = localStorage.getItem('tipo');
@@ -23,7 +16,6 @@ const successMessageRistorante = ref('');
 const errorMessageRistorante = ref('');
 const eliminandoPrenotazioneRistorante = ref(false);
 
-// ------------------ PRENOTAZIONI CAMERE ------------------
 const caricaPrenotazioni = async () => {
   if (!username || !tipo) {
     console.error('Dati utente non trovati nel localStorage');
@@ -79,7 +71,7 @@ const caricaPrenotazioniRistorante = async () => {
   }
 };
 
-const eliminaPrenotazioneRistorante = async (p: PrenotazioneRistorante) => {
+const eliminaPrenotazioneRistorante = async (p: prenotazioni_ristorante) => {
   const msg =
     tipo === 'cliente'
       ? `Vuoi davvero annullare la prenotazione del tavolo ${p.idtavolo}?`

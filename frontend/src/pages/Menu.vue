@@ -28,13 +28,6 @@
         <!-- Modalità modifica (solo per staff) -->
         <div v-else class="edit-mode">
           <div class="mb-3">
-            <label class="form-label">Nome Piatto</label>
-            <input 
-              v-model="piatto.piatto" 
-              type="text" 
-              class="form-control"
-              placeholder="Nome del piatto"
-            >
           </div>
 
           <div class="mb-3">
@@ -75,19 +68,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from 'axios';
-
-interface MenuItem {
-  idpiatto: number;
-  piatto: string;
-  descrizionepiatto: string;
-  prezzopiatto: number;
-  editing?: boolean;
-  original?: {
-    piatto: string;
-    descrizionepiatto: string;
-    prezzopiatto: number;
-  };
-}
+import { MenuItem } from '../types'
 
 export default defineComponent({
   name: 'Menu',
@@ -136,7 +117,7 @@ export default defineComponent({
 
     async saveEdit(piatto: MenuItem) {
       // Validazione
-      if (!piatto.piatto || !piatto.descrizionepiatto || !piatto.prezzopiatto) {
+      if (!piatto.descrizionepiatto || !piatto.prezzopiatto) {
         this.errorMessage = 'Tutti i campi sono obbligatori';
         return;
       }
@@ -174,5 +155,3 @@ export default defineComponent({
   }
 });
 </script>
-
-

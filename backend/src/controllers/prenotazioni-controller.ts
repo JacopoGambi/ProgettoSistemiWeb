@@ -36,7 +36,7 @@ export const getPrenotazioni = async(req: Request, res: Response) =>{
 //deletePrenotazione -> elimina una prenotazione OK FUNZIONA
 export const deletePrenotazione = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const sql = "DELETE FROM prenotazioni WHERE idprenotazion = ?";
+  const sql = "DELETE FROM prenotazioni WHERE idprenotazione = ?";
 
   connection.execute(sql, [id], (err, results) => { 
     if (err) {

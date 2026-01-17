@@ -1,12 +1,11 @@
 <script lang="ts">
     import { defineComponent, PropType } from "vue";
-    import { DettagliCamera } from "../types"; 
+    import { dettaglicamera } from "../types"; 
     
-    // Questo è un Componente Figlio che si aspetta di ricevere una singola Prop 'camera'
     export default defineComponent({
       props: {
         camera: { 
-          type: Object as PropType<DettagliCamera>, 
+          type: Object as PropType<dettaglicamera>, 
           required: true 
         }
       }
