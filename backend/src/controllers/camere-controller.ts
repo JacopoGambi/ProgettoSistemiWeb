@@ -1,42 +1,35 @@
-import type { Request, Response } from "express";
-import { db } from "../utils/db";
+import { connection } from "../utils/db";
+import { Request, Response } from "express";
 
-export function getCamere(req: Request, res: Response) {
-  console.log("Richiesta ricevuta: il frontend sta chiedendo la lista camere...");
+//visualizza camere OK FUNZIONA
+export const getCamere = async (req: Request, res: Response) => {
+  const sql = "SELECT * FROM dettaglicamera";
 
-  const query = "SELECT * FROM DettagliCamera";
-  db.query(query, (err, results) => {
+  connection.execute(sql, [], (err, results) => { 
     if (err) {
-      console.error("Errore query SQL:", err);
-      return res.status(500).json({ error: "Errore database" });
+      console.error("Errore DB:", err);
+      return res.status(500).send("Errore Server: " + err.message);
     }
-
-    console.log("Dati recuperati dal DB:", results);
-    return res.json(results);
+    res.status(200).json(results);
   });
-}
+};
 
-export function updateCamera(req: Request, res: Response) {
-  const id = req.params.id;
-  const { nomecamera, descrizionecamera, prezzocamera } = req.body;
 
-  console.log(`Tentativo di modifica camera ID ${id} con i dati:`, req.body);
+//aggiorna una camera OK FUNZIONA
+export const updateCamera = async (req: Request, res: Response) => {
+  const { id } = req.params; //id della camera da aggiornare
+  const { nomecamera, descrizionecamera, prezzocamera } = req.body; //elementi da aggiornare
+  const sql = `UPDATE dettaglicamera SET nomecamera = ?, descrizionecamera = ?, prezzocamera = ? WHERE idcamera = ?`;
 
-  const query = `
-    UPDATE DettagliCamera
-    SET nomecamera = ?, descrizionecamera = ?, prezzocamera = ?
-    WHERE idcamera = ?
-  `;
-
-  db.query(query, [nomecamera, descrizionecamera, prezzocamera, id], (err) => {
+  connection.execute(sql, [nomecamera, descrizionecamera, prezzocamera, id], (err, results) => {
     if (err) {
-      console.error("Errore aggiornamento:", err);
-      return res
-        .status(500)
-        .json({ success: false, message: "Errore database" });
+      console.error("Errore DB:", err);
+      return res.status(500).send("Errore durante l'aggiornamento: " + err.message);
     }
-
-    console.log("Modifica completata con successo nel DB.");
-    return res.json({ success: true, message: "Camera aggiornata con successo" });
+    const info = results as any; //any = tipo generico
+    if (info.affectedRows === 0) { //se nessuna riga è stata aggiornata
+      return res.status(404).json({ message: "Nessuna modifica effettuata." }); //errore 404
+    }
+    res.status(200).json({ message: "Camera aggiornata con successo!" }); //successo 200
   });
-}
+};

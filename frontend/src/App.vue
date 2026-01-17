@@ -28,7 +28,7 @@
           <li><router-link to="/" @click="closeMenu">Home</router-link></li>
           <li><router-link to="/camere" @click="closeMenu">Camere</router-link></li>
           <li><router-link to="/spiaggia" @click="closeMenu">Spiaggia</router-link></li>
-
+          <li><router-link to="/ristorante" @click="closeMenu">Ristorante</router-link></li>
           <li><router-link to="/scelta-accesso" @click="closeMenu">Login</router-link></li>
           <li><router-link to="/contatti" @click="closeMenu">Contattaci</router-link></li>
           <li v-if="username"><router-link to="/prenotazioni" @click="closeMenu">Prenotazioni</router-link></li>

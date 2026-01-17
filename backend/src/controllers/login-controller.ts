@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { db } from "../utils/db";
+import { connection } from "../utils/db";
 
 export function login(req: Request, res: Response) {
   const { username, password, ruolo } = req.body;
@@ -7,7 +7,7 @@ export function login(req: Request, res: Response) {
   const query =
     "SELECT * FROM Utenti WHERE username = ? AND password = ? AND ruolo = ?";
 
-  db.query(query, [username, password, ruolo], (err, results: any) => {
+  connection.query(query, [username, password, ruolo], (err, results: any) => {
     if (err) {
       console.error("Errore SQL nella POST /login:", (err as any).message);
       return res.status(500).json({ success: false });

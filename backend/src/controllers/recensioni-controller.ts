@@ -1,25 +1,32 @@
-import type { Request, Response } from "express";
-import { db } from "../utils/db";
+import { Request, Response } from "express";
+import { connection } from "../utils/db";
 
-export function getRecensioni(_req: Request, res: Response) {
-  db.query("SELECT * FROM Recensioni ORDER BY idRecensione DESC", (err, results) => {
+//mostra recensioni -> getRecensioni 
+export const getRecensioni = async(req: Request, res: Response) => {
+    const sql = "SELECT * FROM recensioni";
+
+  connection.execute(sql, [], (err, results) => { 
     if (err) {
-      console.error("Errore SQL nella GET /recensioni:", (err as any).message);
-      return res.status(500).json(err);
+      console.error("Errore DB:", err);
+      return res.status(500).send("Errore Server: " + err.message);
     }
-    return res.json(results);
+    res.status(200).json(results);
   });
-}
+};
 
-// SOLO i clienti possono scrivere recensioni (la validazione del ruolo e' lato frontend)
-export function createRecensione(req: Request, res: Response) {
+//createRecensione -> add nuova recensione OK FUNZIONA
+export const createRecensione = async(req: Request, res: Response) => {
   const { username, testo, voto } = req.body;
-  const query = "INSERT INTO Recensioni (username, testo, voto) VALUES (?, ?, ?)";
+  const sql = 'iNSERT INTO Recensioni (username, testo, voto) VALUES (?, ?, ?,';
 
-  db.query(query, [username, testo, voto], (err) => {
-    if (err) {
-      return res.status(500).json({ error: (err as any).message });
+  connection.execute(sql, [username, testo ,voto], (err, results) => {
+    if (err){
+      console.error("Errore", err);
+      return res.status(500).send("Errore Server: " + err.message); //500 = errore server
     }
-    return res.json({ success: true, message: "Recensione aggiunta!" });
+    res.status(201).json({ //201 = risorsa creata
+      message: "Recensione creata con successo!",
+      id: (results as any).insertId //id della nuova recensione
+    });
   });
 }

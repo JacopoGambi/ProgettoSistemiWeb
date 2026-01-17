@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { db } from "../utils/db";
+import { connection } from "../utils/db";
 
 // Ritorna la lista degli ombrelloni occupati in un intervallo date (overlap)
 export function getOmbrelloniOccupati(req: Request, res: Response) {
@@ -16,7 +16,7 @@ export function getOmbrelloniOccupati(req: Request, res: Response) {
     WHERE NOT (datafine < ? OR datainizio > ?)
   `;
 
-  db.query(sql, [String(datainizio), String(datafine)], (err, results: any) => {
+  connection.query(sql, [String(datainizio), String(datafine)], (err, results: any) => {
     if (err) {
       console.error("Errore SQL nella GET /spiaggia/occupati:", (err as any).message);
       return res.status(500).json({ error: "Errore database" });
@@ -48,7 +48,7 @@ export function createPrenotazioneSpiaggia(req: Request, res: Response) {
       AND NOT (datafine < ? OR datainizio > ?)
   `;
 
-  db.query(conflictSql, [String(ombrellone), String(datainizio), String(datafine)], (err, results: any) => {
+  connection.query(conflictSql, [String(ombrellone), String(datainizio), String(datafine)], (err, results: any) => {
     if (err) {
       console.error("Errore SQL nel controllo conflitto:", (err as any).message);
       return res.status(500).json({ success: false, error: "Errore database" });
@@ -65,7 +65,7 @@ export function createPrenotazioneSpiaggia(req: Request, res: Response) {
       VALUES (?, ?, ?, ?)
     `;
 
-    db.query(insertSql, [String(username), String(ombrellone), String(datainizio), String(datafine)], (err2) => {
+    connection.query(insertSql, [String(username), String(ombrellone), String(datainizio), String(datafine)], (err2) => {
       if (err2) {
         console.error("Errore SQL nella POST /spiaggia/prenotazioni:", (err2 as any).message);
         return res.status(500).json({ success: false, error: (err2 as any).message });

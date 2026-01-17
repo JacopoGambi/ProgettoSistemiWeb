@@ -18,7 +18,9 @@ import NotFound from "./pages/NotFound.vue";
 import SceltaAccesso from "./pages/SceltaAccesso.vue";
 import ModificaCamera from "./pages/ModificaCamera.vue";
 import Prenotazioni from "./pages/Prenotazioni.vue";
-import Prenota from "./pages/Prenota.vue";
+import Prenota from "./pages/PrenotazioniCamera.vue";
+import Menu from "./pages/Menu.vue";
+import Ristorante from "./pages/Ristorante.vue";
 
 const router: Router = createRouter({
   history: createWebHistory(),
@@ -47,6 +49,10 @@ const router: Router = createRouter({
     { path: "/modifica-camera/:idcamera", name: "ModificaCamera", component: ModificaCamera, props: true },
     { path: "/prenotazioni", name: "Prenotazioni", component: Prenotazioni },
     { path: "/contatti", component: Contatti },
+    
+    // AGGIUNTE: Route per Menu e Ristorante
+    { path: "/menu", name: "Menu", component: Menu },
+    { path: "/ristorante", name: "Ristorante", component: Ristorante },
 
     { path: "/:pathMatch(.*)*", component: NotFound },
   ],
